@@ -10,11 +10,7 @@ namespace Gighub.Models
             
         }
 
-        public DbSet<ErrorViewModel> ErrorViews { get; set; }
+        public DbSet<Gig> Gigs { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<ErrorViewModel>().HasKey(s => s.RequestId);
-        }
     }
 }
