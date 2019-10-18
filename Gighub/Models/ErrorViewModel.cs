@@ -1,6 +1,3 @@
-using System;
-using System.ComponentModel.DataAnnotations;
-
 namespace Gighub.Models
 {
     public class ErrorViewModel
