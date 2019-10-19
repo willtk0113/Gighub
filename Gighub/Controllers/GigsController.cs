@@ -1,8 +1,11 @@
 ﻿using Gighub.Models;
 using Gighub.ViewModels;
-using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace Gighub.Controllers
 {
@@ -24,6 +27,25 @@ namespace Gighub.Controllers
             };
 
             return View(viewModel);
+        }
+
+
+        [Authorize]
+        [HttpPost]
+        public async Task<ActionResult> Create(GigFormViewModel viewModel)
+        {
+            var gig = new Gig()
+            {
+                Venue = viewModel.Venue,
+                ArtistId = User.FindFirstValue(ClaimTypes.NameIdentifier),
+            DateTime = DateTime.Parse(string.Format("{0} {1}", viewModel.Date, viewModel.Time)),
+                GenreId = viewModel.Genre
+            };
+
+            _dbContext.Add(gig);
+            await _dbContext.SaveChangesAsync();
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }
