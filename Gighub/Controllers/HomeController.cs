@@ -1,15 +1,29 @@
 ﻿using Gighub.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Gighub.Controllers
 {
     public class HomeController : Controller
     {
+
+        private ApplicationDbContext _dbContext;
+
+        public HomeController()
+        {
+            _dbContext = new ApplicationDbContext();
+        }
         
         public IActionResult Index()
         {
-            return View();
+            var upcomingGigs = _dbContext.Gigs
+                .Include(g => g.Artist)
+                .Where(g => g.DateTime > DateTime.Now);
+
+            return View(upcomingGigs);
         }
 
         public IActionResult Privacy()

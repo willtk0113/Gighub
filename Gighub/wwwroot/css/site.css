@@ -39,6 +39,7 @@ a {
 .nav-item {
     line-height: 2;
     font-size: 1.2rem;
+    font-weight: bold;
 }
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -71,6 +72,10 @@ button.accept-policy {
     line-height: inherit;
 }
 
+span.field-validation-error {
+    color: red;
+    font-weight: bold;
+}
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
