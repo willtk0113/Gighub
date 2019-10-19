@@ -2,7 +2,6 @@
 using Gighub.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -38,7 +37,7 @@ namespace Gighub.Controllers
             {
                 Venue = viewModel.Venue,
                 ArtistId = User.FindFirstValue(ClaimTypes.NameIdentifier),
-            DateTime = DateTime.Parse(string.Format("{0} {1}", viewModel.Date, viewModel.Time)),
+                DateTime = viewModel.DateTime,
                 GenreId = viewModel.Genre
             };
 
