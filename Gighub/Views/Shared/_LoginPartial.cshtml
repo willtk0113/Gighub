@@ -3,23 +3,33 @@
 @inject UserManager<ApplicationUser> UserManager
         @if (SignInManager.IsSignedIn(User))
         {
-            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "justify-content-end" }))
+            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "justify-content-end header" }))
             {
                 @Html.AntiForgeryToken()
 
                 <ul class="nav .justify-content-end">
-                    <li class="nav-item">
-                        @Html.ActionLink("Hello " + UserManager.GetUserName(User) + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class="nav-link" })
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle header" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @UserManager.GetUserName(User)
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <ul class="no-bullet">
+                                <li><a class="dropdown-item header" href="#">Gigs I'm Going</a></li>
+                                <li><a class="dropdown-item header" href="#">Artists I'm Following</a></li>
+                                <li role="separator" class="dropdown-divider"></li>
+                                <li> <a class="dropdown-item header" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+
+                            </ul>
+                        </div>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
                 </ul>
             }
         }
         else
         {
             <ul class="nav .justify-content-end">
-                <li class="nav-item">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink",  @class="nav-link"  })</li>
-                <li class="nav-item">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink",  @class="nav-link"  })</li>
+                <li class="nav-item">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink",  @class="nav-link header"  })</li>
+                <li class="nav-item">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink",  @class="nav-link header"  })</li>
             </ul>
         }
 

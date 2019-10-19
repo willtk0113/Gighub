@@ -47,7 +47,7 @@ namespace Gighub.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("DateTime")
+                    b.Property<DateTime>("GetDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("GenreId")
