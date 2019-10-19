@@ -2,6 +2,7 @@
 using Gighub.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Gighub.Controllers
 {
@@ -13,6 +14,8 @@ namespace Gighub.Controllers
         {
             _dbContext = new ApplicationDbContext();
         }
+
+        [Authorize]
         public IActionResult Create()
         {
             var viewModel = new GigFormViewModel()

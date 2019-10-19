@@ -8,11 +8,12 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <div>
+    <div class="navbar bg-light">
         <ul class="nav">
             <li class="nav-item">@Html.ActionLink("Home", "Index", "Home", "", new { @class = "nav-link" })</li>
             <li class="nav-item">@Html.ActionLink("Add a Gig", "Create", "Gigs", "", new { @class = "nav-link" })</li>
         </ul>
+        @Html.Partial("_LoginPartial")
     </div>
 
     <div class="container">
