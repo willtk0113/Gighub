@@ -1,31 +1,32 @@
-﻿@model  IEnumerable<Gig>
+﻿@using System.Globalization
+@model IEnumerable<Gig>
 
 @{
     ViewBag.Title = "Home Page";
 }
 
 
-    
-<ul>
+
+<ul class="gigs">
     @foreach (var gig in Model)
     {
-    <li>
-        <div class="date">
-            <div class="month">
-                @gig.DateTime.ToString("MMM")
+        <li>
+            <div class="gigs-date">
+                <div class="gigs-date-month">
+                    @gig.DateTime.ToString("MMM", DateTimeFormatInfo.InvariantInfo)
+                </div>
+                <div class="gigs-date-day">
+                    @gig.DateTime.ToString("d ", DateTimeFormatInfo.InvariantInfo)
+                </div>
             </div>
-            <div class="day">
-                @gig.DateTime.ToString("d")
+            <div class="gigs-detail">
+                <span class="gigs-artist">
+                    @gig.Artist.Name
+                </span>
+                <span class="gigs-genre">
+                    @gig.Genre.Name
+                </span>
             </div>
-        </div>
-        <div class="details">
-            <span class="artist">
-                @gig.Artist.Name
-            </span>
-            <span class="genre">
-                @gig.Genre.Name
-            </span>
-        </div>
-    </li>
+        </li>
     }
 </ul>
