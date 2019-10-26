@@ -17,7 +17,12 @@ namespace Gighub.Models
 
         }
 
-    
+        public DbSet<Gig> Gigs { get; set; }
+        public DbSet<Genre> Genres { get; set; }
+        public DbSet<Attendance> Attendances { get; set; }
+
+        public DbSet<Following> Followings { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -31,7 +36,34 @@ namespace Gighub.Models
             }
         }
 
-        public DbSet<Gig> Gigs { get; set; }
-        public DbSet<Genre> Genres { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Attendance>()
+                .HasOne(a => a.Gig)
+                .WithMany()
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Attendance>()
+                .HasKey(c => new { c.AttendeeId, c.GigId });
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany(a => a.Follower)
+                .WithOne(f =>f.Followee)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<ApplicationUser>()
+                .HasMany(a => a.Followee)
+                .WithOne(f => f.Follower)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Following>()
+                .HasKey(f => new { f.FollowerId, f.FolloweeId });
+
+
+            base.OnModelCreating(modelBuilder);
+        }
+
+
+    
     }
 }

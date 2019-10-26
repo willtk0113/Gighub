@@ -1,4 +1,5 @@
 ﻿using Gighub.Models;
+using Gighub.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -25,7 +26,13 @@ namespace Gighub.Controllers
                 .Where(g => g.DateTime > DateTime.Now)
                 .ToList();
 
-            return View(upcomingGigs);
+            var viewModel = new HomeViewModel
+            {
+                UpcomingGigs = upcomingGigs,
+                ShowActions = User.Identity.IsAuthenticated,
+            };
+
+            return View(viewModel);
         }
 
         public IActionResult Privacy()

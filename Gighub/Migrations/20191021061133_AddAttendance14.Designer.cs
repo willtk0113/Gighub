@@ -4,14 +4,16 @@ using Gighub.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Gighub.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191021061133_AddAttendance14")]
+    partial class AddAttendance14
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,21 +34,6 @@ namespace Gighub.Migrations
                     b.HasIndex("GigId");
 
                     b.ToTable("Attendances");
-                });
-
-            modelBuilder.Entity("Gighub.Models.Following", b =>
-                {
-                    b.Property<string>("FollowerId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("FolloweeId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("FollowerId", "FolloweeId");
-
-                    b.HasIndex("FolloweeId");
-
-                    b.ToTable("Followings");
                 });
 
             modelBuilder.Entity("Gighub.Models.Genre", b =>
@@ -320,21 +307,6 @@ namespace Gighub.Migrations
                     b.HasOne("Gighub.Models.Gig", "Gig")
                         .WithMany()
                         .HasForeignKey("GigId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Gighub.Models.Following", b =>
-                {
-                    b.HasOne("Gighub.Models.ApplicationUser", "Followee")
-                        .WithMany("Follower")
-                        .HasForeignKey("FolloweeId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("Gighub.Models.ApplicationUser", "Follower")
-                        .WithMany("Followee")
-                        .HasForeignKey("FollowerId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });

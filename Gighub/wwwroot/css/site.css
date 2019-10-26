@@ -26,6 +26,7 @@ a {
     border-color: #1861ac;
 }
 
+
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     color: #fff;
     background-color: #1b6ec2;
@@ -124,8 +125,9 @@ label {
 }
 
 .btn {
-    padding: .375rem 1rem;
+    /*padding: .375rem 1rem;*/
 }
+
 
 .dropdown-menu {
     background-color: #ffc107aa;
@@ -181,4 +183,11 @@ label {
 
             .gigs > li .gigs-detail .gigs-genre {
                 font-size: 15px;
+                vertical-align: middle;
             }
+
+            .gigs > li .gigs-detail .btn {
+                margin-left: 5px;
+                padding: 0.1rem 0.4rem;
+            }
+                
